@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/test', function () {
-    event(new \App\Events\SendMessage());
-    dd('Event fired.');
+  event(new \App\Events\SendMessage(["one" => "two"]));
+  return response([
+    "code" => 200,
+    "message" => "event fired.",
+  ]);
 });
