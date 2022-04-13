@@ -37,14 +37,4 @@
 </script>
 <script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
 <script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
-
-<script type="text/javascript">
-  var i = 0;
-  window.Echo.channel('user-channel')
-    .listen('.UserEvent', (data) => {
-      i++;
-      // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
-      console.log(data)
-    });
-</script>
 </html>

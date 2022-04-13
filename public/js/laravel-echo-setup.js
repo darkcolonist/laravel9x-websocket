@@ -15,6 +15,10 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'socket.io',
   host: window.location.hostname + ":" + window.laravel_echo_port
 });
+window.Echo.channel('user-channel').listen('.UserEvent', function (data) {
+  // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
+  console.log(data);
+});
 
 /***/ }),
 

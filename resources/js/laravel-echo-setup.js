@@ -4,3 +4,9 @@ window.Echo = new Echo({
   broadcaster: 'socket.io',
   host: window.location.hostname + ":" + window.laravel_echo_port
 });
+
+window.Echo.channel('user-channel')
+.listen('.UserEvent', (data) => {
+  // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
+  console.log(data)
+});

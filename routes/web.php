@@ -18,7 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-  event(new \App\Events\SendMessage(["one" => "two"]));
+
+  $someData = [
+    "date" => \Carbon\Carbon::now(),
+    "hash" => Illuminate\Support\Str::random(40)
+  ];
+
+  event(new \App\Events\SendMessage($someData));
   return response([
     "code" => 200,
     "message" => "event fired.",
