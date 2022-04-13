@@ -44,7 +44,7 @@
     .listen('.UserEvent', (data) => {
       i++;
       // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
-      console.log(data.title)
+      console.log(data)
     });
 </script>
 </html>

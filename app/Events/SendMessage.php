@@ -31,7 +31,7 @@ class SendMessage
   */
   public function broadcastOn()
   {
-    return new PrivateChannel('user-channel');
+    return new Channel('user-channel');
   }
   
   public function broadcastAs()
