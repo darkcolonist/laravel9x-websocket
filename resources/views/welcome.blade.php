@@ -29,6 +29,7 @@
       <div class="ml-4 text-gray-600 dark:text-gray-400 text-sm">
         ipsum dolor sit amet consectetur adipisicing elit. Omnis cum porro modi! Ipsam magni nisi hic rerum earum asperiores laudantium recusandae nesciunt, incidunt rem perferendis doloribus iste, dicta, dolorem nostrum?
       </div>
+      <div id="hello-react"></div>
     </div>
   </div>
 </body>
@@ -37,4 +38,5 @@
 </script>
 <script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
 <script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
+<script src="{{ url('/js/app.js') }}" type="text/javascript"></script>
 </html>
