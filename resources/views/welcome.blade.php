@@ -19,6 +19,8 @@
       font-family: 'Nunito', sans-serif;
     }
   </style>
+
+  <link href="{{asset('/css/app.css')}}" rel="stylesheet">
 </head>
 <body class="antialiased">
   <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -30,4 +32,19 @@
     </div>
   </div>
 </body>
+<script>
+  window.laravel_echo_port = '{{env("LARAVEL_ECHO_PORT")}}';
+</script>
+<script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
+<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var i = 0;
+  window.Echo.channel('user-channel')
+    .listen('.UserEvent', (data) => {
+      i++;
+      // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
+      console.log(data.title)
+    });
+</script>
 </html>
