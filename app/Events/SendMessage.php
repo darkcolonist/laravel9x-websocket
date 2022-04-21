@@ -33,7 +33,7 @@ class SendMessage implements ShouldBroadcast
   */
   public function broadcastOn()
   {
-    return new Channel('user-channel');
+    return new Channel('global-notifications');
   }
   
   public function broadcastAs()
@@ -43,8 +43,12 @@ class SendMessage implements ShouldBroadcast
 
   public function broadcastWith()
   {
+    $title = "announcement from localhost";
+    if(isset($this->data["title"])){
+      $title = $this->data["title"];
+    }
     return [
-      'title' => 'this notification from localhost',
+      'title' => $title,
       'data' => $this->data
     ];
   }

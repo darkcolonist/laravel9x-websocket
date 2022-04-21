@@ -5,7 +5,7 @@ window.Echo = new Echo({
   host: window.location.hostname + ":" + window.laravel_echo_port
 });
 
-window.Echo.channel('user-channel')
+window.Echo.channel('global-notifications')
 .listen('.UserEvent', (data) => {
   // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
   console.log(data)

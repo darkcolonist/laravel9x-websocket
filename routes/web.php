@@ -20,10 +20,10 @@ Route::get('/', function () {
 Route::get('/test', function () {
 
   $someData = [
+    "title" => "test announcement",
     "date" => \Carbon\Carbon::now(),
-    "hash" => Illuminate\Support\Str::random(40)
+    "hash" => \Illuminate\Support\Str::random(rand(4,16))
   ];
-
   event(new \App\Events\SendMessage($someData));
   return response([
     "code" => 200,
