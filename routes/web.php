@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
 
   $someData = [
-    "title" => "test announcement",
+    "title" => "test announcement - ".\Illuminate\Support\Str::random(rand(2,5)),
     "date" => \Carbon\Carbon::now(),
     "hash" => \Illuminate\Support\Str::random(rand(4,16))
   ];
