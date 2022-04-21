@@ -2252,6 +2252,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SimpleNotificationWidget() {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.Echo.channel('global-notifications').listen('.UserEvent', function (data) {
+      // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + data.title + '</div>');
+      console.log(data);
+    });
+    return function () {
+      window.Echo.leave('global-notifications');
+    };
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "text-gray-600 dark:text-gray-400",
     children: "i am simple notification provider"
