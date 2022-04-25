@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import Slide from '@mui/material/Slide';
 
 export default function SimpleNotificationWidget() {
@@ -10,12 +12,13 @@ export default function SimpleNotificationWidget() {
     .listen('.UserEvent', (eventData) => {
       // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + eventData.title + '</div>');
       enqueueSnackbar(
-        <React.Fragment>
-          <strong>{eventData.title}</strong>
-          {eventData.data.date}: {eventData.data.hash}
-        </React.Fragment>
+        <></>
         , {
-          variant: "info",
+          content: 
+            <Alert severity='info' variant='outlined'>
+              <AlertTitle>{eventData.title}</AlertTitle>
+              {eventData.data.date}: {eventData.data.hash}
+            </Alert>,
           anchorOrigin: {
             vertical: 'top',
             horizontal: 'right',
@@ -31,6 +34,6 @@ export default function SimpleNotificationWidget() {
   });
 
   return (
-    <div className='text-gray-600 dark:text-gray-400'>i am simple notification provider</div>
+    <></>
   );
 }
