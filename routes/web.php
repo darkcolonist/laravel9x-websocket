@@ -18,13 +18,29 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-
   $someData = [
     "title" => "test announcement - ".\Illuminate\Support\Str::random(rand(2,5)),
     "date" => \Carbon\Carbon::now(),
     "hash" => \Illuminate\Support\Str::random(rand(4,16))
   ];
   event(new \App\Events\SendMessage($someData));
+  return response([
+    "code" => 200,
+    "message" => "event fired.",
+  ]);
+});
+
+Route::get('/test/custom', function (\Illuminate\Http\Request $request) {
+  $channel = $request->input("channel", "unset");
+  $message = $request->input("message", "no message - ".\Illuminate\Support\Str::random(rand(2,5)));
+
+  $someData = [
+    "title" => "custom channel message",
+    "message" => $message,
+    "date" => \Carbon\Carbon::now(),
+    "hash" => \Illuminate\Support\Str::random(rand(4,16))
+  ];
+  event(new \App\Events\SendMessage($someData, $channel));
   return response([
     "code" => 200,
     "message" => "event fired.",

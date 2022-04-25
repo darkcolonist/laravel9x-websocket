@@ -15,15 +15,17 @@ class SendMessage implements ShouldBroadcast
   use Dispatchable, InteractsWithSockets, SerializesModels;
   
   var $data;
+  var $channel;
 
   /**
   * Create a new event instance.
   *
   * @return void
   */
-  public function __construct($data = array())
+  public function __construct($data = array(), $channel = 'global-notifications')
   {
     $this->data = $data;
+    $this->channel = $channel;
   }
   
   /**
@@ -33,7 +35,7 @@ class SendMessage implements ShouldBroadcast
   */
   public function broadcastOn()
   {
-    return new Channel('global-notifications');
+    return new Channel($this->channel);
   }
   
   public function broadcastAs()

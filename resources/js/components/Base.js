@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
 import SimpleNotificationWidget from './SimpleNotificationWidget';
-import TestNotificationButton from './TestNotificationButton';
+import SendMessageButtons from './SendMessageButtons';
 
 const darkTheme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ export default function Base() {
     <ThemeProvider theme={darkTheme}>
       <SnackbarProvider maxSnack={3}>
         <h1 className='text-gray-600 dark:text-gray-400'>Hello React!</h1>
-        <TestNotificationButton />
+        <SendMessageButtons />
         <SimpleNotificationWidget />
       </SnackbarProvider>
     </ThemeProvider>
