@@ -14,6 +14,7 @@ react 18.x
 ## Commands
 - `/sample-websocket-app$ laravel-echo-server start` to start the laravel echo server
 - `/sample-websocket-app$ npm run watch` to rebuild laravel mix react resources
+- `/sample-websocket-app$ npm run watch-poll` to rebuild laravel mix react resources, using vagrant homestead
 
 ## License
 
