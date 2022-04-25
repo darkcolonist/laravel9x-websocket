@@ -6,6 +6,8 @@ laravel 9.x
 
 react 18.x
 
+mui 5.6.2
+
 ## Resources
 - adevait.com/laravel/using-laravel-with-react-js
 - https://www.codecheef.org/article/laravel-event-broadcasting-using-socketio-with-redis
