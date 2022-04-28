@@ -32,7 +32,12 @@ export default function SendMessageButtons() {
 
   function handleCustomChannelClick(){
     
-    axios.get(`/test/custom?channel=${customChannel.current}&message=${customMessage.current}`)
+    axios.get('/test/custom', {
+      params: {
+        channel: customChannel.current,
+        message: customMessage.current
+      }
+    })
       .then(result => {});
   }
 
