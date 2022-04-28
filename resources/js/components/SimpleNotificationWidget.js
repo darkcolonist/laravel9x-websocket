@@ -19,10 +19,6 @@ export default function SimpleNotificationWidget() {
               <AlertTitle>{eventData.title}</AlertTitle>
               {eventData.data.date}: {eventData.data.hash}
             </Alert>,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right',
-          },
           TransitionComponent: Slide,
         });
         // console.log(eventData)

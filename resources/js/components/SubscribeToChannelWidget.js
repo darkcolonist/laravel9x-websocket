@@ -1,18 +1,32 @@
-import { Button, TextField, Box } from '@mui/material';
+import { Alert, AlertTitle, Button, TextField } from '@mui/material';
+import React, { Fragment, useRef } from 'react';
 import { useSnackbar } from 'notistack';
-import React, { Fragment, useEffect, useState } from 'react';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Slide from '@mui/material/Slide';
 
 export default function SubscribeToChannelWidget() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [customChannel,setCustomChannel] = useState("custom");
 
-  useEffect(() => {
-    window.Echo.channel(customChannel)
+  const channelRef = useRef("");
+  const previousChannelRef = useRef("");
+
+  function handleSubscribeClick(){
+    if (channelRef.current === previousChannelRef.current ||
+        channelRef.current.trim() === ""){
+      enqueueSnackbar("no change detected or empty values not allowed", {
+        variant: "warning"
+      });
+      return;
+    }
+
+    channelRef.current = channelRef.current.trim();
+
+    if (previousChannelRef.current !== ""){
+      window.Echo.leave(previousChannelRef.current);
+      enqueueSnackbar(`unsubscribed from ${previousChannelRef.current}`);
+      previousChannelRef.current = channelRef.current;
+    }
+
+    window.Echo.channel(channelRef.current)
       .listen('.UserEvent', (eventData) => {
-        // $("#broadcast").append('<div class="alert alert-success">' + i + '.' + eventData.title + '</div>');
         enqueueSnackbar(
           <></>
           , {
@@ -24,27 +38,17 @@ export default function SubscribeToChannelWidget() {
             anchorOrigin: {
               vertical: 'top',
               horizontal: 'right',
-            },
-            TransitionComponent: Slide,
+            }
           });
       });
 
-    return () => {
-      window.Echo.leave(customChannel);
-    }
-  }, [ customChannel ]);
-
-  function handleSubscribeClick(){
-    axios.get("/test/custom?channel="+customChannel)
-      .then(result => {});
+    enqueueSnackbar(`subscribed to ${channelRef.current}`);
   }
 
   return (
-    <Fragment>
-      <div>
-        <TextField variant="outlined" onChange={e => setCustomChannel(e.target.value)} defaultValue={customChannel} label="channel"></TextField>
-        <Button onClick={handleSubscribeClick} variant="outlined">subscribe</Button>
-      </div>
-    </Fragment>
+    <div>
+      <TextField variant="outlined" onBlur={e => { channelRef.current = e.target.value }} defaultValue={channelRef.current} label="channel"></TextField>
+      <Button onClick={handleSubscribeClick} variant="outlined">subscribe</Button>
+    </div>
   );
 }

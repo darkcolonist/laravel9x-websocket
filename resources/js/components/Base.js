@@ -16,7 +16,13 @@ const darkTheme = createTheme({
 export default function Base() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={3} 
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        variant="info"
+      >
         <h1 className='text-gray-600 dark:text-gray-400'>Hello React!</h1>
         <SendMessageButtons />
         <SimpleNotificationWidget />

@@ -1,14 +1,12 @@
 import { Button, TextField, Box } from '@mui/material';
 import axios from 'axios';
-import React, { 
-  Fragment,
-  useEffect, useState } from 'react';
+import React, { Fragment, useRef } from 'react';
 import SubscribeToChannelWidget from './SubscribeToChannelWidget';
 
 export default function SendMessageButtons() {
 
-  const [customChannel,setCustomChannel] = useState("custom");
-  const [customMessage,setCustomMessage] = useState("hello");
+  const customMessage = useRef("hello");
+  const customChannel = useRef("custom");
 
   const boxProps = {
     component:"form",
@@ -23,9 +21,9 @@ export default function SendMessageButtons() {
     autoComplete: "off"
   };
 
-  useEffect(() => {
+  // useEffect(() => {
     
-  });
+  // });
 
   function handleDefaultGlobalClick(){
     axios.get("/test")
@@ -33,7 +31,8 @@ export default function SendMessageButtons() {
   }
 
   function handleCustomChannelClick(){
-    axios.get("/test/custom?channel="+customChannel)
+    
+    axios.get(`/test/custom?channel=${customChannel.current}&message=${customMessage.current}`)
       .then(result => {});
   }
 
@@ -46,8 +45,8 @@ export default function SendMessageButtons() {
       </Box>
       <Box {...boxProps}>
         <div>
-          <TextField variant="outlined" onChange={e => setCustomChannel(e.target.value)} defaultValue={customChannel} label="channel"></TextField>
-          <TextField variant="outlined" onChange={e => setCustomMessage(e.target.value)} defaultValue={customMessage} label="message"></TextField>
+          <TextField variant="outlined" onChange={e => customChannel.current = e.target.value} defaultValue={customChannel.current} label="channel"></TextField>
+          <TextField variant="outlined" onChange={e => customMessage.current = e.target.value} defaultValue={customMessage.current} label="message"></TextField>
           <Button onClick={handleCustomChannelClick} variant="outlined">custom channel</Button>
         </div>
       </Box>
