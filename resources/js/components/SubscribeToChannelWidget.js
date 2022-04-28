@@ -22,8 +22,9 @@ export default function SubscribeToChannelWidget() {
     if (previousChannelRef.current !== ""){
       window.Echo.leave(previousChannelRef.current);
       enqueueSnackbar(`unsubscribed from ${previousChannelRef.current}`);
-      previousChannelRef.current = channelRef.current;
     }
+    
+    previousChannelRef.current = channelRef.current;
 
     window.Echo.channel(channelRef.current)
       .listen('.UserEvent', (eventData) => {
